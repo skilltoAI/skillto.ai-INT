@@ -7,9 +7,9 @@ destination=${destination:-"$HOME/.codex/skills"}
 skill=${1:-all}
 
 case "$skill" in
-  all) names="skillto-int skillto-int-douyin-xhs-crawler skillto-int-table" ;;
-  skillto-int|skillto-int-douyin-xhs-crawler|skillto-int-table) names="$skill" ;;
-  *) echo "Usage: ./install.sh [all|skillto-int|skillto-int-douyin-xhs-crawler|skillto-int-table]" >&2; exit 2 ;;
+  all) names="skillto-int skillto-int-douyin-xhs-crawler skillto-int-table skillto-int-qwen38-media-analysis" ;;
+  skillto-int|skillto-int-douyin-xhs-crawler|skillto-int-table|skillto-int-qwen38-media-analysis) names="$skill" ;;
+  *) echo "Usage: ./install.sh [all|skillto-int|skillto-int-douyin-xhs-crawler|skillto-int-table|skillto-int-qwen38-media-analysis]" >&2; exit 2 ;;
 esac
 
 mkdir -p "$destination"

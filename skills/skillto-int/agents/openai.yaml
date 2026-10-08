@@ -1,3 +1,3 @@
 interface:
   display_name: "Skillto INT"
-  short_description: "Route social-content collection and multimedia report-table workflows"
+  short_description: "Route social collection, Qwen multimodal analysis, and report-table workflows"

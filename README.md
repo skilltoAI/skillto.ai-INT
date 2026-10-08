@@ -1,12 +1,13 @@
 # skillto.ai INT skills
 
-This repository distributes one parent skill and two namespaced child skills:
+This repository distributes one parent skill and three namespaced child skills:
 
 - `skillto-int`: routes end-to-end Skillto INT requests.
 - `skillto-int-douyin-xhs-crawler`: authorized Douyin/Xiaohongshu collection, ownership verification, and recent-content analysis.
 - `skillto-int-table`: local or authenticated remote multimedia report tables with semantic MCP CRUD.
+- `skillto-int-qwen38-media-analysis`: configurable Qwen3.8 multimodal image/video understanding, classification, OCR, frame extraction, and shot analysis.
 
-The three skills are installed as sibling directories because Codex-compatible agents discover skills at the skill-root level. The parent routes work to the two child skills; this preserves parent-child behavior without hiding the children from discovery.
+The four skills are installed as sibling directories because Codex-compatible agents discover skills at the skill-root level. The parent routes work to the three child skills; this preserves parent-child behavior without hiding the children from discovery.
 
 ## Install all skills
 
@@ -29,14 +30,16 @@ The default destination is `$CODEX_HOME/skills` when `CODEX_HOME` is set, otherw
 ```powershell
 .\install.ps1 -Skill skillto-int-douyin-xhs-crawler
 .\install.ps1 -Skill skillto-int-table
+.\install.ps1 -Skill skillto-int-qwen38-media-analysis
 ```
 
 ```sh
 ./install.sh skillto-int-douyin-xhs-crawler
 ./install.sh skillto-int-table
+./install.sh skillto-int-qwen38-media-analysis
 ```
 
-Install `skillto-int` together with both children for automatic parent routing. Installing an individual child is supported when only that capability is needed.
+Install `skillto-int` together with all three children for automatic parent routing. Installing an individual child is supported when only that capability is needed.
 
 ## Vibe coding agent installation
 
@@ -50,6 +53,7 @@ An agent that can clone Git repositories and write to its skill root should:
 skills/skillto-int/                    -> <agent-skill-root>/skillto-int/
 skills/skillto-int-douyin-xhs-crawler/ -> <agent-skill-root>/skillto-int-douyin-xhs-crawler/
 skills/skillto-int-table/              -> <agent-skill-root>/skillto-int-table/
+skills/skillto-int-qwen38-media-analysis/ -> <agent-skill-root>/skillto-int-qwen38-media-analysis/
 ```
 
 4. Verify that each destination has `SKILL.md` at its root and preserve all bundled `scripts/`, `references/`, `assets/`, and `agents/` directories.
@@ -60,6 +64,7 @@ skills/skillto-int-table/              -> <agent-skill-root>/skillto-int-table/
 - Python 3.10 or newer.
 - `skillto-int-douyin-xhs-crawler`: Playwright plus an installed Chromium/Chrome/Edge browser. On first use, follow its [cookie setup guide](skills/skillto-int-douyin-xhs-crawler/references/cookie-setup.md) and use the bundled interactive helper; never commit or paste cookies into chat.
 - `skillto-int-table`: no third-party dependency for the local stdio MCP server. Remote mode needs an authenticated report-table endpoint and a protected API-key file as described in its references.
+- `skillto-int-qwen38-media-analysis`: PowerShell for the bundled LAN client, plus FFmpeg or Python/OpenCV for video frame extraction. Configure `QWEN38_BASE_URL`, `QWEN38_MODEL`, and `QWEN38_API_KEY` for the target service.
 
 ## Validate
 
@@ -69,6 +74,7 @@ Use Codex's `skill-creator/scripts/quick_validate.py` against all three director
 python -m py_compile skills/skillto-int-douyin-xhs-crawler/scripts/crawl_recent_douyin_videos.py
 python skills/skillto-int-table/scripts/test_server.py
 node skills/skillto-int-table/assets/test-schema-controls.cjs
+python -m py_compile skills/skillto-int-qwen38-media-analysis/scripts/extract_frames_cv.py
 ```
 
 Review each `SKILL.md` before use. External access, authenticated crawling, and remote report mutations remain subject to user authorization and target-platform rules.

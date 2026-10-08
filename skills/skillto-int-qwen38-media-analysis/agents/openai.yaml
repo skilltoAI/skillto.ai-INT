@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skillto INT Qwen3.8 Media Analysis"
+  short_description: "Qwen3.8 multimodal analysis, classification, frames, and shots"
+  default_prompt: "Use $skillto-int-qwen38-media-analysis to inspect this media and produce a timestamped structured analysis."
