@@ -5,7 +5,7 @@ description: Use the LAN AMD-PAD Qwen3.8 service for multimodal image or video u
 
 # Skillto INT Qwen3.8 Media Analysis
 
-Use an OpenAI-compatible Qwen3.8 Responses endpoint for inference. The known AMD-PAD default is `http://192.168.3.188:8080/v1` with model `qwen3.8-35b-a3b-q6`; override it with `QWEN38_BASE_URL` and `QWEN38_MODEL` when installing elsewhere. Supply credentials through `QWEN38_API_KEY`, never in this skill or source files. Keep source media local unless the user explicitly requests another destination.
+Use the fixed internal AMD-PAD OpenAI-compatible Responses endpoint `http://192.168.3.188:8080/v1` with model `qwen3.8-35b-a3b-q6`. These non-secret deployment constants are intentionally embedded in the scripts because this skill is for the stable internal environment. Supply credentials through `QWEN38_API_KEY`, never in this skill or source files. Keep source media local unless the user explicitly requests another destination.
 
 ## Route The Task
 

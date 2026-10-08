@@ -8,8 +8,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $invokeScript = Join-Path $PSScriptRoot 'invoke-qwen38.ps1'
-$baseUrl = if ($env:QWEN38_BASE_URL) { $env:QWEN38_BASE_URL.TrimEnd('/') } else { 'http://192.168.3.188:8080/v1' }
-$model = if ($env:QWEN38_MODEL) { $env:QWEN38_MODEL } else { 'qwen3.8-35b-a3b-q6' }
+$baseUrl = 'http://192.168.3.188:8080/v1'
+$model = 'qwen3.8-35b-a3b-q6'
 
 switch ($Command) {
     'status' {

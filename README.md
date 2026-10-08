@@ -64,7 +64,7 @@ skills/skillto-int-qwen38-media-analysis/ -> <agent-skill-root>/skillto-int-qwen
 - Python 3.10 or newer.
 - `skillto-int-douyin-xhs-crawler`: Playwright plus an installed Chromium/Chrome/Edge browser. On first use, follow its [cookie setup guide](skills/skillto-int-douyin-xhs-crawler/references/cookie-setup.md) and use the bundled interactive helper; never commit or paste cookies into chat.
 - `skillto-int-table`: no third-party dependency for the local stdio MCP server. Remote mode needs an authenticated report-table endpoint and a protected API-key file as described in its references.
-- `skillto-int-qwen38-media-analysis`: PowerShell for the bundled LAN client, plus FFmpeg or Python/OpenCV for video frame extraction. Configure `QWEN38_BASE_URL`, `QWEN38_MODEL`, and `QWEN38_API_KEY` for the target service.
+- `skillto-int-qwen38-media-analysis`: PowerShell for the fixed internal AMD-PAD Qwen endpoint, plus FFmpeg or Python/OpenCV for video frame extraction. The LAN base URL and model are embedded deployment constants; provide only `QWEN38_API_KEY` when the service does not accept the built-in local placeholder.
 
 ## Validate
 

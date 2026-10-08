@@ -3,14 +3,14 @@ param(
     [Parameter(Mandatory)][string]$Prompt,
     [string[]]$ImagePath,
     [switch]$Json,
-    [string]$Model = $(if ($env:QWEN38_MODEL) { $env:QWEN38_MODEL } else { 'qwen3.8-35b-a3b-q6' }),
-    [string]$BaseUrl = $(if ($env:QWEN38_BASE_URL) { $env:QWEN38_BASE_URL } else { 'http://192.168.3.188:8080/v1' }),
     [string]$ApiKey,
     [int]$MaxOutputTokens = 2048,
     [string]$OutputPath
 )
 
 $ErrorActionPreference = 'Stop'
+$Model = 'qwen3.8-35b-a3b-q6'
+$BaseUrl = 'http://192.168.3.188:8080/v1'
 if ([string]::IsNullOrWhiteSpace($ApiKey)) {
     $ApiKey = [Environment]::GetEnvironmentVariable('QWEN38_API_KEY', 'User')
 }
