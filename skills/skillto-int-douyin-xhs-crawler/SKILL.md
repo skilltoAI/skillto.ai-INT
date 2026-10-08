@@ -1,5 +1,5 @@
 ---
-name: douyin-xhs-crawler
+name: skillto-int-douyin-xhs-crawler
 description: Build or repair local Python crawlers for Douyin and Xiaohongshu account/video data when the user provides authorized cookies, logged-in sessions, account URLs, or asks for SQLite/web analysis of post metrics.
 ---
 
@@ -45,7 +45,7 @@ This skill includes `scripts/crawl_recent_douyin_videos.py` for a repeatable Dou
 Example:
 
 ```powershell
-python <skills-directory>/douyin-xhs-crawler/scripts/crawl_recent_douyin_videos.py crawl \
+python <skills-directory>/skillto-int-douyin-xhs-crawler/scripts/crawl_recent_douyin_videos.py crawl \
   --accounts E:\path\accounts.json `
   --db E:\path\data\douyin_recent_videos.sqlite3 `
   --jsonl E:\path\data\douyin_recent_videos.jsonl `

@@ -7,7 +7,7 @@
 - 远程 MCP：`http://192.168.3.188:5173/api/report-tables/mcp`。
 - 远程 REST：`http://192.168.3.188:5173/api/report-tables/`。直接使用后端 `18080` 端口时去掉 `/api` 前缀。
 - 远程部署：`/home/anycom/videoDeepInsight`；共享存储：项目 `data/report_tables/`，可由 `REPORT_TABLE_ROOT` 覆盖。不按用户隔离报表；Key 创建者只决定 Key 的管理归属。
-- 本地原工作区通常为 `C:/Users/Administrator/skillto-table-data`，以实际 `SKILLTO_TABLE_ROOT` 为准，页面通常为 `http://127.0.0.1:8765/?table=<tableId>`。本地副本与远程副本独立。
+- 本地工作区默认为 `~/skillto-table-data`，以实际 `SKILLTO_TABLE_ROOT` 为准，页面通常为 `http://127.0.0.1:8765/?table=<tableId>`。本地副本与远程副本独立。
 
 执行请求前明确目标：AMD-PAD URL 表示远程操作，本地 URL 表示本地操作。来源、目标或覆盖意图不清楚时先确认，不同时修改两个副本，不自动更改其他任务的 MCP 配置。
 
@@ -18,7 +18,7 @@
 ```json
 {
   "command": "python",
-  "args": ["C:/Users/Administrator/.codex/skills/skillto-table/scripts/server.py"],
+  "args": ["<agent-skill-root>/skillto-int-table/scripts/server.py"],
   "env": {
     "SKILLTO_TABLE_API_URL": "http://192.168.3.188:5173/api/report-tables/mcp",
     "SKILLTO_TABLE_API_KEY_FILE": "<受保护运行期目录>/amd-pad.key"

@@ -1,11 +1,11 @@
 param(
   [string]$Destination = $(if ($env:CODEX_HOME) { Join-Path $env:CODEX_HOME 'skills' } else { Join-Path $HOME '.codex\skills' }),
-  [ValidateSet('all', 'douyin-xhs-crawler', 'skillto-table')][string]$Skill = 'all'
+  [ValidateSet('all', 'skillto-int', 'skillto-int-douyin-xhs-crawler', 'skillto-int-table')][string]$Skill = 'all'
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$names = if ($Skill -eq 'all') { @('douyin-xhs-crawler', 'skillto-table') } else { @($Skill) }
+$names = if ($Skill -eq 'all') { @('skillto-int', 'skillto-int-douyin-xhs-crawler', 'skillto-int-table') } else { @($Skill) }
 New-Item -ItemType Directory -Path $Destination -Force | Out-Null
 foreach ($name in $names) {
   $source = Join-Path $repoRoot "skills\$name"

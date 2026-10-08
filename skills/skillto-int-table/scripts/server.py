@@ -458,7 +458,7 @@ def dispatch(request):
     method = request.get("method")
     if method == "initialize":
         return {"protocolVersion": "2024-11-05", "capabilities": {"tools": {}},
-                "serverInfo": {"name": "skillto-table", "version": "1.0.0"}}
+                "serverInfo": {"name": "skillto-int-table", "version": "1.0.0"}}
     if method == "ping":
         return {}
     if method == "tools/list":

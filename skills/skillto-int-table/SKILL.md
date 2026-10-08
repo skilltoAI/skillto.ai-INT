@@ -1,5 +1,5 @@
 ---
-name: skillto-table
+name: skillto-int-table
 description: Build and maintain local or AMD-PAD remote multimedia tables organized by knowledge base and project, with shared report storage, human review pages and authenticated semantic MCP operations for AI.
 ---
 
@@ -38,7 +38,7 @@ These are built-in program responsibilities for every existing and newly generat
 
 First identify the user's entities, relationships, fields, row identity, and desired CRUD actions in their own terminology. Choose field types and controls (text, number, date, boolean, image, video, single choice, multiple choice, or short video information), then map requested search, field filters, date ranges, ratings, and tags to concrete table interactions. Ask only when an ambiguity would change the data model or risk data loss. Expose business nouns and actions in the page; keep IDs, JSON paths, scripts, and protocol details out of user-facing controls.
 
-For AI operations, use the bundled `skillto-table` MCP server and its semantic tools. The server owns storage, IDs, history, validation, and query mechanics; agents should not edit the JSON directly for routine CRUD. Use direct file conversion only for bulk import/migration, then validate through MCP. See [MCP usage](references/mcp.md). If MCP is unavailable in the current client, launch/register it or report that limitation explicitly; do not claim the semantic wrapper is active.
+For AI operations, use the bundled `skillto-int-table` MCP server and its semantic tools. The server owns storage, IDs, history, validation, and query mechanics; agents should not edit the JSON directly for routine CRUD. Use direct file conversion only for bulk import/migration, then validate through MCP. See [MCP usage](references/mcp.md). If MCP is unavailable in the current client, launch/register it or report that limitation explicitly; do not claim the semantic wrapper is active.
 
 ## Account Benchmark Tag Standard
 
