@@ -9,10 +9,10 @@ Use the fixed internal AMD-PAD OpenAI-compatible Responses endpoint `http://192.
 
 ## Route The Task
 
-- Single image, a small frame set, OCR, or classification: use `scripts/invoke-qwen38.ps1`.
-- Video sampling: run `scripts/extract-frames.ps1`, then analyze the resulting manifest and frames with `scripts/invoke-qwen38.ps1`.
+- Single image, a small frame set, OCR, or classification: use cross-platform `scripts/invoke_qwen38.py`. Windows users may use `scripts/invoke-qwen38.ps1`.
+- Video sampling: run cross-platform `scripts/extract_frames.py`, then analyze the resulting manifest and frames with `scripts/invoke_qwen38.py`. Windows PowerShell wrappers remain available.
 - Full shot breakdown: read `references/shot-analysis.md` before extracting frames.
-- AMD-PAD CLI operations (`status`, `chat`, `json-chat`, `vision`, `ocr`): use `scripts/qwen38-remote-cli.ps1`. Its `native` mode is only for SSH maintenance, requires `sshpass`, and requires `QWEN38_NATIVE_WRAPPER` to point to an authorized local wrapper.
+- AMD-PAD CLI operations (`status`, `chat`, `json-chat`, `vision`, `ocr`): use cross-platform `scripts/qwen38_cli.py`. On Windows, `scripts/qwen38-remote-cli.ps1` also supports these commands; its extra `native` mode is only for authorized SSH maintenance.
 - Large batches: start with a coarse pass, then sample densely only around transitions or uncertain segments. Avoid sending near-duplicate frames.
 
 ## Required Behavior
@@ -25,6 +25,22 @@ Use the fixed internal AMD-PAD OpenAI-compatible Responses endpoint `http://192.
 6. Do not bypass DRM, paywalls, authentication, or other access controls.
 
 ## Common Commands
+
+macOS/Linux:
+
+```sh
+skill_root="${CODEX_HOME:-$HOME/.codex}/skills/skillto-int-qwen38-media-analysis"
+
+python3 "$skill_root/scripts/qwen38_cli.py" status
+python3 "$skill_root/scripts/qwen38_cli.py" vision ./frame.jpg \
+  "Describe the scene, visible text, people, actions, and safety risks."
+python3 "$skill_root/scripts/qwen38_cli.py" json-chat \
+  "Return a JSON taxonomy for these labels: tutorial, interview, ad."
+python3 "$skill_root/scripts/extract_frames.py" ./input.mp4 ./input-frames \
+  --interval 5 --max-frames 120
+```
+
+Windows PowerShell:
 
 ```powershell
 $codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME '.codex' }
@@ -42,6 +58,8 @@ $skill = Join-Path $codexHome 'skills\skillto-int-qwen38-media-analysis'
 & "$skill\scripts\qwen38-remote-cli.ps1" status
 & "$skill\scripts\qwen38-remote-cli.ps1" json-chat 'Return a JSON taxonomy for these labels: tutorial, interview, ad.'
 ```
+
+The Python entrypoints use only the standard library for HTTP and image requests. Frame extraction prefers `ffmpeg`/`ffprobe`; on macOS install them with `brew install ffmpeg`. If FFmpeg is unavailable, `extract_frames.py` falls back to `extract_frames_cv.py`, which requires the `opencv-python` package.
 
 ## Outputs
 

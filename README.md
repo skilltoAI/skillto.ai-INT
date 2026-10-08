@@ -64,17 +64,17 @@ skills/skillto-int-qwen38-media-analysis/ -> <agent-skill-root>/skillto-int-qwen
 - Python 3.10 or newer.
 - `skillto-int-douyin-xhs-crawler`: Playwright plus an installed Chromium/Chrome/Edge browser. On first use, follow its [cookie setup guide](skills/skillto-int-douyin-xhs-crawler/references/cookie-setup.md) and use the bundled interactive helper; never commit or paste cookies into chat.
 - `skillto-int-table`: no third-party dependency for the local stdio MCP server. Remote mode needs an authenticated report-table endpoint and a protected API-key file as described in its references.
-- `skillto-int-qwen38-media-analysis`: PowerShell for the fixed internal AMD-PAD Qwen endpoint, plus FFmpeg or Python/OpenCV for video frame extraction. The LAN base URL and model are embedded deployment constants; provide only `QWEN38_API_KEY` when the service does not accept the built-in local placeholder.
+- `skillto-int-qwen38-media-analysis`: cross-platform Python 3 client for the fixed internal AMD-PAD Qwen endpoint; Windows PowerShell wrappers are also included. Frame extraction prefers FFmpeg (`brew install ffmpeg` on macOS) and falls back to Python/OpenCV. The LAN base URL and model are embedded deployment constants; provide only `QWEN38_API_KEY` when the service does not accept the built-in local placeholder.
 
 ## Validate
 
-Use Codex's `skill-creator/scripts/quick_validate.py` against all three directories. Basic bundled checks:
+Use Codex's `skill-creator/scripts/quick_validate.py` against all four directories. Basic bundled checks:
 
 ```powershell
 python -m py_compile skills/skillto-int-douyin-xhs-crawler/scripts/crawl_recent_douyin_videos.py
 python skills/skillto-int-table/scripts/test_server.py
 node skills/skillto-int-table/assets/test-schema-controls.cjs
-python -m py_compile skills/skillto-int-qwen38-media-analysis/scripts/extract_frames_cv.py
+python -m py_compile skills/skillto-int-qwen38-media-analysis/scripts/*.py
 ```
 
 Review each `SKILL.md` before use. External access, authenticated crawling, and remote report mutations remain subject to user authorization and target-platform rules.
