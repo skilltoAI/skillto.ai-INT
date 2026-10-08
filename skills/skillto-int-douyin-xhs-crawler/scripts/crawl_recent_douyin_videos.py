@@ -751,9 +751,11 @@ def command_crawl(args: argparse.Namespace) -> int:
     configured_cookie = args.cookies or os.environ.get("DOUYIN_COOKIE_FILE") or DEFAULT_COOKIE_PATH
     cookie_path = Path(configured_cookie).expanduser().resolve()
     if not cookie_path.is_file():
+        setup_guide = Path(__file__).resolve().parent.parent / "references" / "cookie-setup.md"
         raise FileNotFoundError(
-            "No Douyin cookie file was found. Pass --cookies, set DOUYIN_COOKIE_FILE, "
-            f"or install the default cookie at {DEFAULT_COOKIE_PATH}."
+            "No authenticated Douyin cookie file was found. Obtain the cookie from your own logged-in "
+            "douyin.com browser session, then run scripts/configure_cookie.py interactively, pass --cookies, "
+            f"or set DOUYIN_COOKIE_FILE. Default path: {DEFAULT_COOKIE_PATH}. Setup guide: {setup_guide}"
         )
     guard_restricted_cookie(cookie_path, args.allow_xiaoyu_cookie)
     accounts = load_accounts(args.accounts)

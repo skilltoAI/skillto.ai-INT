@@ -58,7 +58,7 @@ skills/skillto-int-table/              -> <agent-skill-root>/skillto-int-table/
 ## Requirements
 
 - Python 3.10 or newer.
-- `skillto-int-douyin-xhs-crawler`: Playwright plus an installed Chromium/Chrome/Edge browser. Supply an authorized cookie file through `--cookies`, `DOUYIN_COOKIE_FILE`, or the documented OS-specific secret path. Never commit cookies.
+- `skillto-int-douyin-xhs-crawler`: Playwright plus an installed Chromium/Chrome/Edge browser. On first use, follow its [cookie setup guide](skills/skillto-int-douyin-xhs-crawler/references/cookie-setup.md) and use the bundled interactive helper; never commit or paste cookies into chat.
 - `skillto-int-table`: no third-party dependency for the local stdio MCP server. Remote mode needs an authenticated report-table endpoint and a protected API-key file as described in its references.
 
 ## Validate

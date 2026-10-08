@@ -20,6 +20,7 @@ Use this skill when implementing, debugging, or extending a local crawler for Do
 
 - The existing login account and its current cookie/session are the default for all crawler work. Keep using that account unless the user explicitly authorizes a different login account for the current task.
 - Keep the ordinary default login cookie outside the skill and source tree. The bundled CLI resolves cookies in this order: explicit `--cookies`, `DOUYIN_COOKIE_FILE`, `DOUYIN_DEFAULT_COOKIE_FILE`, then `%LOCALAPPDATA%\skillto.ai\secrets\douyin-cookie.txt` on Windows or `~/.config/skillto.ai/secrets/douyin-cookie.txt` elsewhere. Never place the cookie value in this skill, source code, command examples, logs, or reports. If the default file is absent, report the expected path instead of searching unrelated runtime files.
+- If no ordinary cookie is configured, stop before crawling and clearly tell the user that an authenticated Douyin cookie is required. Give the expected file path and point them to [cookie setup](references/cookie-setup.md), which explains how to obtain the cookie from their own logged-in browser and configure it without putting the secret in chat or shell history. Do not merely report `FileNotFoundError`.
 - The login account named `小与AI` is restricted. Never load, inspect, validate, refresh, export, or send requests with its cookie/session unless the user explicitly authorizes use of `小与AI` for the specific task. A general request to crawl, a target account named `小与AI`, or the mere availability of its cookie is not authorization.
 - Do not silently switch to `小与AI` if the default account fails or is rate limited. Ask for explicit authorization before any use; otherwise stop or continue only with the default account as appropriate.
 - Keep the `小与AI` cookie in a separate secret file or browser profile, never in this skill, source control, logs, or a shared cookie file. Configure its path only through `DOUYIN_XIAOYU_COOKIE_FILE`; the portable fallback is a separate `douyin-xiaoyu-cookie.txt` beside the ordinary secret file. Select it only through an explicit per-task account choice. Do not change the ordinary default cookie path or default account selection.
@@ -62,6 +63,8 @@ Important options:
 - `--days` changes the rolling window.
 - `--limit` runs only the first N accounts for diagnostics.
 - `--allow-xiaoyu-cookie` is required before the CLI will load the restricted `小与AI` cookie path, and should only be used after explicit user authorization for that run.
+
+For first-time setup or cookie diagnostics, read [cookie setup](references/cookie-setup.md). Prefer the bundled `scripts/configure_cookie.py` helper because it accepts the value interactively without echoing it and stores only the cookie file outside the skill directory.
 
 ## Capture Strategy
 
