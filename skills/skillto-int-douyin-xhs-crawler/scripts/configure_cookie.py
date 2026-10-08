@@ -9,12 +9,8 @@ from pathlib import Path
 
 
 def default_cookie_path() -> Path:
-    configured = os.environ.get("DOUYIN_DEFAULT_COOKIE_FILE")
-    if configured:
-        return Path(configured).expanduser()
-    local_app_data = os.environ.get("LOCALAPPDATA")
-    if local_app_data:
-        return Path(local_app_data) / "skillto.ai" / "secrets" / "douyin-cookie.txt"
+    if os.name == "nt":
+        return Path(r"E:\wwai\media-download\runtime\douyin_auth\default-cookie.txt")
     return Path.home() / ".config" / "skillto.ai" / "secrets" / "douyin-cookie.txt"
 
 

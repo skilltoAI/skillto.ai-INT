@@ -29,12 +29,12 @@ python3 ./scripts/configure_cookie.py
 
 Paste the cookie only into the hidden interactive prompt. The helper validates recognizable authenticated-session fields, writes the OS-specific default secret file, and prints only the path and cookie-name count—not the cookie value.
 
-Default locations:
+Fixed default locations:
 
-- Windows: `%LOCALAPPDATA%\skillto.ai\secrets\douyin-cookie.txt`
+- Windows: `E:\wwai\media-download\runtime\douyin_auth\default-cookie.txt`
 - Linux/macOS: `~/.config/skillto.ai/secrets/douyin-cookie.txt`
 
-To use a different protected file, set `DOUYIN_DEFAULT_COOKIE_FILE` before running the helper, or point the crawler to an existing file with `--cookies` / `DOUYIN_COOKIE_FILE`.
+To use a different protected file for a crawl, use `--cookies` or set `DOUYIN_COOKIE_FILE`. The interactive helper always writes the fixed platform default so every local session resolves the same file.
 
 Check configuration without revealing the secret:
 

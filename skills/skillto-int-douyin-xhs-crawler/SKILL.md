@@ -19,11 +19,11 @@ Use this skill when implementing, debugging, or extending a local crawler for Do
 ## Account Selection and Restricted Cookie
 
 - The existing login account and its current cookie/session are the default for all crawler work. Keep using that account unless the user explicitly authorizes a different login account for the current task.
-- Keep the ordinary default login cookie outside the skill and source tree. The bundled CLI resolves cookies in this order: explicit `--cookies`, `DOUYIN_COOKIE_FILE`, `DOUYIN_DEFAULT_COOKIE_FILE`, then `%LOCALAPPDATA%\skillto.ai\secrets\douyin-cookie.txt` on Windows or `~/.config/skillto.ai/secrets/douyin-cookie.txt` elsewhere. Never place the cookie value in this skill, source code, command examples, logs, or reports. If the default file is absent, report the expected path instead of searching unrelated runtime files.
+- The ordinary default login cookie has one explicit machine path on Windows: `E:\wwai\media-download\runtime\douyin_auth\default-cookie.txt`. On macOS/Linux its explicit default is `~/.config/skillto.ai/secrets/douyin-cookie.txt`. The bundled CLI resolves cookies in this order only: explicit `--cookies`, `DOUYIN_COOKIE_FILE`, then the platform default above. Never search unrelated runtime files or silently choose another cookie. Never place the cookie value in this skill, source code, command examples, logs, or reports.
 - If no ordinary cookie is configured, stop before crawling and clearly tell the user that an authenticated Douyin cookie is required. Give the expected file path and point them to [cookie setup](references/cookie-setup.md), which explains how to obtain the cookie from their own logged-in browser and configure it without putting the secret in chat or shell history. Do not merely report `FileNotFoundError`.
 - The login account named `小与AI` is restricted. Never load, inspect, validate, refresh, export, or send requests with its cookie/session unless the user explicitly authorizes use of `小与AI` for the specific task. A general request to crawl, a target account named `小与AI`, or the mere availability of its cookie is not authorization.
 - Do not silently switch to `小与AI` if the default account fails or is rate limited. Ask for explicit authorization before any use; otherwise stop or continue only with the default account as appropriate.
-- Keep the `小与AI` cookie in a separate secret file or browser profile, never in this skill, source control, logs, or a shared cookie file. Configure its path only through `DOUYIN_XIAOYU_COOKIE_FILE`; the portable fallback is a separate `douyin-xiaoyu-cookie.txt` beside the ordinary secret file. Select it only through an explicit per-task account choice. Do not change the ordinary default cookie path or default account selection.
+- Keep the `小与AI` cookie in a separate secret file or browser profile, never in this skill, source control, logs, or a shared cookie file. Its Windows path is `E:\wwai\media-download\runtime\single_video_cookies\douyin_xiaoyu_ai_cookie.txt`; macOS/Linux uses `~/.config/skillto.ai/secrets/douyin-xiaoyu-cookie.txt`. `DOUYIN_XIAOYU_COOKIE_FILE` may explicitly override that path. Select it only through an explicit per-task account choice. Do not change the ordinary default cookie path or default account selection.
 
 ## Recommended Architecture
 
@@ -57,7 +57,7 @@ Account lists may be JSON, CSV, or TXT. JSON/CSV fields can include `url`, `sec_
 
 Important options:
 
-- `--cookies` overrides the default cookie file. When omitted, the CLI checks `DOUYIN_COOKIE_FILE`, then `DOUYIN_DEFAULT_COOKIE_FILE`, then the OS-specific `skillto.ai/secrets/douyin-cookie.txt` location.
+- `--cookies` overrides the default cookie file. When omitted, the CLI checks `DOUYIN_COOKIE_FILE`, then the fixed Windows path `E:\wwai\media-download\runtime\douyin_auth\default-cookie.txt` or the fixed macOS/Linux path `~/.config/skillto.ai/secrets/douyin-cookie.txt`.
 - `--headed` opens Chromium for login/session diagnostics.
 - `--browser-channel` or `--browser-executable` can point Playwright at an installed Chrome/Edge when the bundled Chromium cache is unavailable.
 - `--days` changes the rolling window.

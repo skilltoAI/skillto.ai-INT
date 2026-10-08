@@ -21,18 +21,13 @@ DOUYIN_POST_ENDPOINT = "/aweme/v1/web/aweme/post/"
 DOUYIN_PROFILE_ENDPOINT = "/aweme/v1/web/user/profile/other/"
 
 
-def secret_path(env_name: str, filename: str) -> Path:
-    configured = os.environ.get(env_name)
-    if configured:
-        return Path(configured).expanduser()
-    local_app_data = os.environ.get("LOCALAPPDATA")
-    if local_app_data:
-        return Path(local_app_data) / "skillto.ai" / "secrets" / filename
-    return Path.home() / ".config" / "skillto.ai" / "secrets" / filename
-
-
-XIAOYU_COOKIE_PATH = secret_path("DOUYIN_XIAOYU_COOKIE_FILE", "douyin-xiaoyu-cookie.txt")
-DEFAULT_COOKIE_PATH = secret_path("DOUYIN_DEFAULT_COOKIE_FILE", "douyin-cookie.txt")
+if os.name == "nt":
+    DEFAULT_COOKIE_PATH = Path(r"E:\wwai\media-download\runtime\douyin_auth\default-cookie.txt")
+    DEFAULT_XIAOYU_COOKIE_PATH = Path(r"E:\wwai\media-download\runtime\single_video_cookies\douyin_xiaoyu_ai_cookie.txt")
+else:
+    DEFAULT_COOKIE_PATH = Path.home() / ".config" / "skillto.ai" / "secrets" / "douyin-cookie.txt"
+    DEFAULT_XIAOYU_COOKIE_PATH = Path.home() / ".config" / "skillto.ai" / "secrets" / "douyin-xiaoyu-cookie.txt"
+XIAOYU_COOKIE_PATH = Path(os.environ.get("DOUYIN_XIAOYU_COOKIE_FILE") or DEFAULT_XIAOYU_COOKIE_PATH).expanduser()
 
 
 @dataclass(frozen=True)
