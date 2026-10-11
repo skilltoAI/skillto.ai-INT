@@ -1,0 +1,4 @@
+interface:
+  display_name: "小与封面图"
+  short_description: "分析视频关键帧与ASR，用固定小与IP制作沉浸式或对比图例横竖封面"
+  default_prompt: "使用 $skillto-int-xiaoyu-cover 拉取并分析我指定的视频、场景关键帧和ASR，生成统一IP与品牌风格的3:4和4:3两张沉浸式或多案例封面。"
